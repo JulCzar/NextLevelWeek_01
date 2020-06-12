@@ -1,0 +1,28 @@
+.form-sent-container {
+  background: rgba(0,0,0,.95);
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  display: flex;
+  z-index: 9999;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+}
+
+.form-sent {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.form-sent > .icon {
+  color: #34CB79;
+  height: 100px;
+  width: 100px;
+}
+
+.form-sent > .title {
+  font-family: Ubuntu;
+  font-size: 50px;
+}

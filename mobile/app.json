@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Ecoleta",
+    "slug": "Ecoleta",
+    "description": "Um aplicativo construído durante a Next Level Week para elevar meu aprendizado da stack React, React Native e NodeJS.",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#f0f0f5"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+
+    "android": {
+      "package": "com.rocketseat.ecoleta.julczar"
+    }
+  }
+}
