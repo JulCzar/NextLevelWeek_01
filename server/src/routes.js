@@ -15,6 +15,7 @@ const upload = multer(multerConfig)
 
 routes.get('/items', itemsController.index)
 routes.get('/points', pointsController.index)
+routes.get('/points/all', pointsController.listAll)
 routes.get('/points/:id', pointsController.show)
 
 routes.post(

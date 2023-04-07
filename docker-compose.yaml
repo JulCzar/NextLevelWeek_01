@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: web.dockerfile
+    ports:
+      - "80:80"
+  server:
+    build:
+      context: .
+      dockerfile: server.dockerfile
+    ports:
+      - "4000:4000"

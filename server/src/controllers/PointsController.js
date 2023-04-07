@@ -18,7 +18,20 @@ const createPointController = () => {
 
     const serializedPoints = points.map(point => ({
       ...point,
-      image: `http://192.168.0.104:4000/uploads/${point.image}`
+      image: `http://localhost:4000/uploads/${point.image}`
+    }))
+
+    return res.json(serializedPoints)
+  }
+  const listAll = async (req, res) => {
+    const points = await knex('points')
+      .join('point_items', 'points.id', '=', 'point_items.point_id')
+      .distinct()
+      .select('points.*')
+
+    const serializedPoints = points.map(point => ({
+      ...point,
+      image: `http://localhost:4000/uploads/${point.image}`
     }))
 
     return res.json(serializedPoints)
@@ -33,10 +46,10 @@ const createPointController = () => {
       return res
         .status(400)
         .json({ message: 'point not found' })
-    
+
     const serializedPoint = {
       ...point,
-      image: `http://192.168.0.104:4000/uploads/${point.image}`
+      image: `http://localhost:4000/uploads/${point.image}`
     }
 
     const items = await knex('items')
@@ -45,7 +58,7 @@ const createPointController = () => {
 
     return res.json({ point: serializedPoint, items })
   }
-  
+
   const create = async (req, res) => {
     const {
       name,
@@ -57,7 +70,7 @@ const createPointController = () => {
       uf,
       items
     } = req.body
-  
+
     const trx = await knex.transaction()
 
     const point = {
@@ -70,28 +83,29 @@ const createPointController = () => {
       city,
       uf
     }
-  
+
     const inserted_ids = await trx('points').insert(point)
-  
+
     const point_id = inserted_ids[0]
-  
+
     const pointItems = items
       .split(',')
       .map(item => parseInt(item
         .trim()))
-        .map(item_id => ({item_id, point_id}))
-  
+      .map(item_id => ({ item_id, point_id }))
+
     await trx('point_items').insert(pointItems)
 
     await trx.commit()
-  
-    return res.json({ id: point_id, ...point})
+
+    return res.json({ id: point_id, ...point })
   }
-  
+
   return {
     index,
     show,
-    create
+    create,
+    listAll
   }
 }
 
